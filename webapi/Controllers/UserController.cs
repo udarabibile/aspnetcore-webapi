@@ -34,7 +34,7 @@ namespace webapi.Controllers
         public IEnumerable<User> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(0, 2).Select(index => new User
+            return Enumerable.Range(0 , 2).Select(index => new User
             {
                 DateOfBirth = DateTime.Now.AddDays(index),
                 FirstName = RandomNames[index]
