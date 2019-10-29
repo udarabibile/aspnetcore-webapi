@@ -27,10 +27,8 @@ namespace webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserDbContext>(opts => opts.UseInMemoryDatabase("userDB"));
-            services.AddScoped<UserDbContext>();
-
-            // services.AddDbContext<EmployeeContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:EmployeeDB"]));
+            services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
+            services.AddScoped<DatabaseContext>();
             services.AddControllers();
         }
 
