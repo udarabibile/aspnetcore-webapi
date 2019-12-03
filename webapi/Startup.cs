@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using webapi.Models;
+using webapi.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace webapi
@@ -28,7 +29,8 @@ namespace webapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
-            services.AddScoped<DatabaseContext>();
+            services.AddScoped<DatabaseContext>(); // ApplicationContext
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers();
         }
 

@@ -2,9 +2,9 @@
 
 namespace webapi.Models
 {
-    public class Book
+    public class Book : BaseEntity
     {
-        public long BookId { get; set; }
-        public string BookName { get; set; }
+        public String Title { get; set; }
+        public DateTime Year { get; set; }
     }
 }
