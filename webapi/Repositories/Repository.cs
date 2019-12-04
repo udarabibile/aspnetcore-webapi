@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using webapi.Models;
 
 namespace webapi.Repositories
@@ -20,10 +22,10 @@ namespace webapi.Repositories
         {
             return entities.AsEnumerable();
         }
-        public T GetById(Guid id)
-        {
-            return entities.SingleOrDefault(s => s.Id == id); // TODO: GET UID
-        }
+        //public T GetById(Guid id)
+        //{
+        //    return entities.SingleOrDefault(s => s.Id == id); // TODO: GET UID
+        //}
         public void Insert(T entity)
         {
             if (entity == null)
@@ -50,5 +52,13 @@ namespace webapi.Repositories
             entities.Remove(entity);
             context.SaveChanges();
         }
+
+
+
+        public Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate)
+            => context.Set<T>().FirstOrDefaultAsync(predicate);
+
+
+
     }
 }

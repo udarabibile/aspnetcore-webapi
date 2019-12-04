@@ -31,6 +31,7 @@ namespace webapi
             services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
             services.AddScoped<DatabaseContext>(); // ApplicationContext
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddControllers();
         }
 

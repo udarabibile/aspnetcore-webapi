@@ -1,12 +1,15 @@
+using System.Threading.Tasks;
 using webapi.Models;
 
 namespace webapi.Repositories
 {
-    public class AccountRepository : Repository<Author>, IAuthorRepository
+    public class AuthorRepository : Repository<Author>, IAuthorRepository
     {
-        public AccountRepository(DatabaseContext databaseContext)
-            : base(databaseContext)
+        public AuthorRepository(DatabaseContext context) : base(context) { }
+
+        public Task<Author> GetByFirstName(string name)
         {
+            return FirstOrDefault(w => w.Name == name);
         }
     }
 }

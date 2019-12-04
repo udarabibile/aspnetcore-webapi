@@ -17,7 +17,7 @@ namespace webapi.Controllers
         private IRepository<Author> authorRepository;
         private IRepository<Book> bookRepository;
 
-        public AuthorController(ILogger<AuthorController> logger, IRepository<Author> authorRepository, IRepository<Book> bookRepository)
+        public AuthorController(ILogger<AuthorController> logger, IAuthorRepository authorRepository, IRepository<Book> bookRepository)
         {
             _logger = logger;
             // _database = context;
@@ -29,6 +29,10 @@ namespace webapi.Controllers
         [HttpGet]
         [Route("")]
         public IEnumerable<Author> GetAllAuthots() => authorRepository.GetAll();
+
+        [HttpGet]
+        [Route("books")]
+        public IEnumerable<Book> GetAllBooks() => bookRepository.GetAll();
 
     }
 }
