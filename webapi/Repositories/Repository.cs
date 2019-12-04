@@ -16,16 +16,16 @@ namespace webapi.Repositories
         public Repository(DatabaseContext context)
         {
             this.context = context;
-            entities = context.Set<T>();
+            entities = context.Set<T>(); // TODO BIBI:
         }
         public IEnumerable<T> GetAll()
         {
             return entities.AsEnumerable();
         }
-        //public T GetById(Guid id)
-        //{
-        //    return entities.SingleOrDefault(s => s.Id == id); // TODO: GET UID
-        //}
+        public T GetById(Guid id)
+        {
+           return entities.SingleOrDefault(s => s.Id == id); // TODO: GET UID
+        }
         public void Insert(T entity)
         {
             if (entity == null)
@@ -55,6 +55,7 @@ namespace webapi.Repositories
 
 
 
+        // TODO BIBI: ASYNC REPOSITORY
         public Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate)
             => context.Set<T>().FirstOrDefaultAsync(predicate);
 

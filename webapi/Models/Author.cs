@@ -8,6 +8,5 @@ namespace webapi.Models
         public String Name { get; set; }
         public String Country { get; set; }
         public virtual ICollection<Book> Books { get; set; }
-
     }
 }
