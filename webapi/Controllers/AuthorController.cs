@@ -15,24 +15,17 @@ namespace webapi.Controllers
         // private readonly DatabaseContext _database;
 
         private IRepository<Author> authorRepository;
-        private IRepository<Book> bookRepository;
 
-        public AuthorController(ILogger<AuthorController> logger, IAuthorRepository authorRepository, IRepository<Book> bookRepository)
+        public AuthorController(ILogger<AuthorController> logger, IAuthorRepository authorRepository)
         {
             _logger = logger;
-            // _database = context;
             this.authorRepository = authorRepository;
-            this.bookRepository = bookRepository;
 
         }
 
         [HttpGet]
         [Route("")]
         public IEnumerable<Author> GetAllAuthots() => authorRepository.GetAll();
-
-        [HttpGet]
-        [Route("books")]
-        public IEnumerable<Book> GetAllBooks() => bookRepository.GetAll();
 
     }
 }
