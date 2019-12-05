@@ -10,7 +10,7 @@ namespace webapi.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly DatabaseContext context;
+        protected readonly DatabaseContext context;
         private DbSet<T> entities;
         string errorMessage = string.Empty;
         public Repository(DatabaseContext context)
@@ -24,42 +24,30 @@ namespace webapi.Repositories
         }
         public T GetById(Guid id)
         {
-           return entities.SingleOrDefault(s => s.Id == id); // TODO: GET UID
+           return entities.SingleOrDefault(s => s.Id == id);
         }
         public void Insert(T entity)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
+            if (entity == null) throw new ArgumentNullException("entity");
+
             entities.Add(entity);
             context.SaveChanges();
         }
         public void Update(T entity)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
+            if (entity == null) throw new ArgumentNullException("entity");
             context.SaveChanges();
         }
-        public void Delete(T entity)
+        public void Delete(Guid id)
         {
-            if (entity == null)
-            {
-                throw new ArgumentNullException("entity");
-            }
+            if (id == null) throw new ArgumentNullException("entity");
+
+            T entity = entities.SingleOrDefault(s => s.Id == id);
             entities.Remove(entity);
             context.SaveChanges();
         }
 
-
-
-        // TODO BIBI: ASYNC REPOSITORY
-        public Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate)
-            => context.Set<T>().FirstOrDefaultAsync(predicate);
-
-
-
+        // public Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate)
+        //     => context.Set<T>().FirstOrDefaultAsync(predicate);
     }
 }

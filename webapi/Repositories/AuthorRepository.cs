@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using webapi.Models;
 
 namespace webapi.Repositories
@@ -7,9 +8,10 @@ namespace webapi.Repositories
     {
         public AuthorRepository(DatabaseContext context) : base(context) { }
 
-        public Task<Author> GetByFirstName(string name)
+        public Task<Author> GetByName(string name)
         {
-            return FirstOrDefault(w => w.Name == name);
+            return context.Set<Author>().FirstOrDefaultAsync(author => author.Name == name);
+            // return FirstOrDefault(author => author.Name == name);
         }
     }
 }

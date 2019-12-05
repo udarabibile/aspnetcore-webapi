@@ -10,6 +10,6 @@ namespace webapi.Repositories
         T GetById(Guid id);
         void Insert(T entity);
         void Update(T entity);
-        void Delete(T entity);
+        void Delete(Guid id);
     }
 }

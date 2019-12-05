@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using webapi.Models;
 using webapi.Repositories;
 
@@ -11,21 +12,19 @@ namespace webapi.Controllers
     [Route("author")]
     public class AuthorController : ControllerBase
     {
-        private readonly ILogger<AuthorController> _logger;
-        // private readonly DatabaseContext _database;
+        private IAuthorRepository _authorRepository;
 
-        private IRepository<Author> authorRepository;
+        public AuthorController(IAuthorRepository authorRepository)
+            { _authorRepository = authorRepository; }
 
-        public AuthorController(ILogger<AuthorController> logger, IAuthorRepository authorRepository)
-        {
-            _logger = logger;
-            this.authorRepository = authorRepository;
+        [HttpGet("")]
+        public IEnumerable<Author> GetAllAuthots() => _authorRepository.GetAll();
 
-        }
+        [HttpGet("{authorName}")]
+        public Task<Author> GetAuthorByName(String authorName) => _authorRepository.GetByName(authorName);
 
-        [HttpGet]
-        [Route("")]
-        public IEnumerable<Author> GetAllAuthots() => authorRepository.GetAll();
-
+        [HttpPost("")]
+        [AllowAnonymous]
+        public void AddAuthor([FromBody] Author author) => _authorRepository.Insert(author);
     }
 }
