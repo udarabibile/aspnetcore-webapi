@@ -16,7 +16,7 @@ namespace webapi.Repositories
         public Repository(DatabaseContext context)
         {
             this.context = context;
-            entities = context.Set<T>(); // TODO BIBI:
+            entities = context.Set<T>();
         }
         public IEnumerable<T> GetAll()
         {
@@ -29,14 +29,13 @@ namespace webapi.Repositories
         public void Insert(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity");
-
             entities.Add(entity);
-            context.SaveChanges();
+            //context.SaveChanges();
         }
         public void Update(T entity)
         {
             if (entity == null) throw new ArgumentNullException("entity");
-            context.SaveChanges();
+            //context.SaveChanges();
         }
         public void Delete(Guid id)
         {
@@ -44,7 +43,7 @@ namespace webapi.Repositories
 
             T entity = entities.SingleOrDefault(s => s.Id == id);
             entities.Remove(entity);
-            context.SaveChanges();
+            //context.SaveChanges();
         }
 
         // public Task<T> FirstOrDefault(Expression<Func<T, bool>> predicate)

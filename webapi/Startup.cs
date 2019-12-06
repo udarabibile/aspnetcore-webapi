@@ -32,6 +32,7 @@ namespace webapi
             services.AddScoped<DatabaseContext>(); // ApplicationContext
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
         }
 
