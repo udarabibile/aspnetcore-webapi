@@ -16,7 +16,7 @@ namespace webapi.Repositories
         public Repository(DatabaseContext context)
         {
             this.context = context;
-            entities = context.Set<T>(); // TODO BIBI:
+            entities = context.Set<T>();
         }
         public IEnumerable<T> GetAll()
         {

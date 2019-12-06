@@ -12,7 +12,6 @@ namespace webapi.Controllers
     public class BookController : ControllerBase
     {
         private IRepository<Book> bookRepository;
-
         public BookController(IRepository<Book> bookRepository)
             { this.bookRepository = bookRepository;}
 
