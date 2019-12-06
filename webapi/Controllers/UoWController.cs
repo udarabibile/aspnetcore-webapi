@@ -1,41 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
 using webapi.Models;
 using webapi.Repositories;
 
 namespace webapi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("uow")]
     public class UoWConrtroller : ControllerBase
     {
+        private readonly ILogger<UoWConrtroller> _logger;
         private IUnitOfWork _unitOfWork;
 
-        public UoWConrtroller(IUnitOfWork unitOfWork)
-            { _unitOfWork = unitOfWork; }
-
-        [HttpGet]
-        [Route("")]
-        public IEnumerable<Author> GetAllBooks()
+        public UoWConrtroller(ILogger<UoWConrtroller> logger, IUnitOfWork unitOfWork)
         {
-            Book book = new Book();
-            book.Title = "ALI";
-            _unitOfWork.BookRepository.Insert(book);
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+        }
 
-            List<Book> books = new List<Book>();
-            books.Add(book);
+        [HttpGet("")]
+        public Task<Author> CommitUoW()
+        {
+            Book gambler = new Book("The Gambler");
+            Author fyodor = new Author("Fyodor Dostoyevsky", "Russia", new List<Book>() { gambler });
 
-            Author author = new Author();
-            author.Name = "HEY";
-            author.Books = books;
+            try
+            {
+                _unitOfWork.BookRepository.Insert(gambler);
+                _unitOfWork.AuthorRepository.Insert(fyodor);
+                _unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error when creating uow transaction, thereby reverting back. Error: {}", ex.Message);
+                _unitOfWork.Rollback();
+                return Task.FromResult(new Author());
+            }
 
-            _unitOfWork.AuthorRepository.Insert(author);
-
-            _unitOfWork.Save();
-
-            return _unitOfWork.AuthorRepository.GetAll();
+            return _unitOfWork.AuthorRepository.GetByName(fyodor.Name);
         }
     }
 }

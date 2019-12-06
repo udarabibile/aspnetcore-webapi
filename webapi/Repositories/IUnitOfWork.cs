@@ -1,12 +1,12 @@
-﻿using System;
-using webapi.Models;
+﻿using webapi.Models;
 
 namespace webapi.Repositories
 {
     public interface IUnitOfWork
     {
-        IRepository<Author> AuthorRepository { get; }
+        IAuthorRepository AuthorRepository { get; }
         IRepository<Book> BookRepository { get; }
-        void Save();
+        void Commit();
+        void Rollback();
     }
 }
