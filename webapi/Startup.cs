@@ -9,14 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
 
-using DataAccess;
-using BusinessLogic.Services;
-using BusinessLogic.Services.Impl;
-using DataAccess.Repositories;
-using DataAccess.Repositories.Impl;
+using Core;
 
 namespace webapi
 {
@@ -32,12 +26,7 @@ namespace webapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
-            services.AddScoped<DatabaseContext>();
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IAuthorRepository, AuthorRepository>();
-            services.AddScoped<IAuthorService, AuthorService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            Configurations.configureDependencies(services);
             services.AddControllers();
         }
 
