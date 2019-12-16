@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using webapi.Models;
-using webapi.Repositories;
+using DataAccess.Models;
+using DataAccess.Repositories;
 
 namespace webapi.Controllers
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace webapi.Models
+namespace DataAccess.Models
 {
     public class Author : BaseEntity
     {

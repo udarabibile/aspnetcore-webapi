@@ -10,9 +10,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using webapi.Models;
-using webapi.Repositories;
 using Microsoft.EntityFrameworkCore;
+
+using DataAccess;
+using BusinessLogic.Services;
+using BusinessLogic.Services.Impl;
+using DataAccess.Repositories;
+using DataAccess.Repositories.Impl;
 
 namespace webapi
 {
@@ -29,9 +33,10 @@ namespace webapi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatabaseContext>(opts => opts.UseInMemoryDatabase("database"));
-            services.AddScoped<DatabaseContext>(); // ApplicationContext
+            services.AddScoped<DatabaseContext>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllers();
         }

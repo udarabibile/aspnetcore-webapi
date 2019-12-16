@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using webapi.Models;
+using DataAccess.Models;
 
-namespace webapi.Repositories
+namespace DataAccess.Repositories
 {
     public interface IRepository<T> where T : BaseEntity
     {

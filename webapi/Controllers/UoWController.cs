@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using webapi.Models;
-using webapi.Repositories;
+using DataAccess.Models;
+using DataAccess.Repositories;
 
 namespace webapi.Controllers
 {

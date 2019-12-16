@@ -1,6 +1,6 @@
 using System;
 
-namespace webapi.Models
+namespace DataAccess.Models
 {
     public interface IEntity
     {

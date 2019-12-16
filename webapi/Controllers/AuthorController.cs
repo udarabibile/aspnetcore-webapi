@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using webapi.Models;
-using webapi.Repositories;
+
+using DataAccess.Models;// ???
+using BusinessLogic.Services;
 
 namespace webapi.Controllers
 {
@@ -12,19 +13,19 @@ namespace webapi.Controllers
     [Route("author")]
     public class AuthorController : ControllerBase
     {
-        private IAuthorRepository _authorRepository;
+        private IAuthorService authorService;
 
-        public AuthorController(IAuthorRepository authorRepository)
-            { _authorRepository = authorRepository; }
+        public AuthorController(IAuthorService authorService)
+            { this.authorService = authorService; }
 
         [HttpGet("")]
-        public IEnumerable<Author> GetAllAuthots() => _authorRepository.GetAll();
+        public IEnumerable<Author> GetAllAuthots() => authorService.GetAllAuthors();
 
-        [HttpGet("{authorName}")]
-        public Task<Author> GetAuthorByName(String authorName) => _authorRepository.GetByName(authorName);
+        //[HttpGet("{authorName}")]
+        //public Task<Author> GetAuthorByName(String authorName) => authorService.GetByName(authorName);
 
-        [HttpPost("")]
-        [AllowAnonymous]
-        public void AddAuthor([FromBody] Author author) => _authorRepository.Insert(author);
+        //[HttpPost("")]
+        //[AllowAnonymous]
+        //public void AddAuthor([FromBody] Author author) => _authorRepository.Insert(author);
     }
 }

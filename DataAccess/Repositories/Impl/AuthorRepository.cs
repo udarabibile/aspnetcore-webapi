@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using webapi.Models;
+using DataAccess.Models;
 
-namespace webapi.Repositories
+namespace DataAccess.Repositories.Impl
 {
     public class AuthorRepository : Repository<Author>, IAuthorRepository
     {

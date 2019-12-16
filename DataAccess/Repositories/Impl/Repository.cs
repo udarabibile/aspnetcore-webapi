@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using webapi.Models;
+using DataAccess.Models;
 
-namespace webapi.Repositories
+namespace DataAccess.Repositories.Impl
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {

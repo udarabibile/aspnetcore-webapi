@@ -1,6 +1,6 @@
-﻿using webapi.Models;
+﻿using DataAccess.Models;
 
-namespace webapi.Repositories
+namespace DataAccess.Repositories.Impl
 {
     public class UnitOfWork : IUnitOfWork
     {
