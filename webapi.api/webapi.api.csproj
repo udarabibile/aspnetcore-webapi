@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\webapi.business\webapi.business.csproj" />
+    <ProjectReference Include="..\webapi.domain\webapi.domain.csproj" />
+    <ProjectReference Include="..\webapi.core\webapi.core.csproj" />
+  </ItemGroup>
+
+</Project>
