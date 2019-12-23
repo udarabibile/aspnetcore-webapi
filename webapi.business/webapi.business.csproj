@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\webapi.data\webapi.data.csproj" />
-    <ProjectReference Include="..\webapi.domain\webapi.domain.csproj" />
+    <ProjectReference Include="..\webapi.core\webapi.core.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

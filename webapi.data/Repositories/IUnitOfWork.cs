@@ -1,4 +1,4 @@
-﻿using webapi.domain.Models;
+﻿using webapi.core.Models;
 
 namespace webapi.data.Repositories
 {

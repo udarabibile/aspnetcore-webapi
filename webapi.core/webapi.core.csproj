@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.0" />
+    <Compile Remove="Class1.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\webapi.business\webapi.business.csproj" />
-    <ProjectReference Include="..\webapi.data\webapi.data.csproj" />
+    <Folder Include="Models\" />
   </ItemGroup>
-
 </Project>

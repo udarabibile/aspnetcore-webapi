@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using webapi.domain.Models;
+using webapi.core.Models;
 using webapi.data.Repositories;
 
 namespace webapi.business.Services.Impl
