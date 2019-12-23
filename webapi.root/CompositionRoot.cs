@@ -9,9 +9,9 @@ using webapi.data.Repositories.Impl;
 
 namespace webapi.root
 {
-    public class Configurations
+    public class CompositionRoot
     {
-        public Configurations()
+        public CompositionRoot()
         {
         }
 
