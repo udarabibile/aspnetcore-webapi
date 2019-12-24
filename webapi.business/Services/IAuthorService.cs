@@ -8,6 +8,7 @@ namespace webapi.business.Services
     public interface IAuthorService
     {
         IEnumerable<Author> GetAllAuthors();
-        //Task<Author> GetByName(string firstName);
+        Task<Author> GetAuthorByName(string firstName);
+        void CreateAuthor(Author author);
     }
 }

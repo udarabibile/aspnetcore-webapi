@@ -1,36 +1,42 @@
-﻿// using System;
-// using System.Collections.Generic;
-// using Microsoft.AspNetCore.Mvc;
-// using Microsoft.AspNetCore.Authorization;
-// using webapi.core.Models;
-// using DataAccess.Repositories;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-// namespace webapi.Controllers
-// {
-//     [ApiController]
-//     [Route("[controller]")]
-//     public class BookController : ControllerBase
-//     {
-//         private IRepository<Book> bookRepository;
-//         public BookController(IRepository<Book> bookRepository)
-//             { this.bookRepository = bookRepository;}
+using webapi.core.Models;
+using webapi.business.Services;
+using System.Threading.Tasks;
 
-//         [HttpGet]
-//         [Route("")]
-//         public IEnumerable<Book> GetAllBooks() => bookRepository.GetAll();
+namespace webapi.api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class BookController : ControllerBase
+    {
+        private IBookService bookService;
 
-//         [HttpGet]
-//         [Route("{bookId}")]
-//         public Book GetBookById(Guid bookId) => bookRepository.GetById(bookId);
+        public BookController(IBookService bookService)
+        { this.bookService = bookService; }
 
-//         [HttpPost]
-//         [Route("")]
-//         [AllowAnonymous]
-//         public void AddBook([FromBody] Book book) => bookRepository.Insert(book);
+        [HttpGet("")]
+        public IEnumerable<Book> GetAllBooks() =>bookService.GetAllBooks();
 
-//         [HttpDelete]
-//         [Route("{bookId}")]
-//         [AllowAnonymous]
-//         public void DeleteBook(Guid bookId) => bookRepository.Delete(bookId);
-//     }
-// }
+        [HttpGet]
+        [Route("id/{bookId}")]
+        public Book GetBookById(Guid bookId) => bookService.GetBookById(bookId);
+
+        [HttpPost]
+        [Route("")]
+        [AllowAnonymous]
+        public void AddBook([FromBody] Book book) => bookService.CreateBook(book);
+
+        [HttpDelete]
+        [Route("{bookId}")]
+        [AllowAnonymous]
+        public void DeleteBook(Guid bookId) => bookService.DeleteBook(bookId);
+
+
+        [HttpGet("sample")]
+        public Task<Author> CreateSample() => bookService.CreateSampleBookWithAuthor();
+    }
+}

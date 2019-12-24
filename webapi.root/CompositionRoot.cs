@@ -22,6 +22,7 @@ namespace webapi.root
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IAuthorService, AuthorService>();
+            services.AddScoped<IBookService, BookService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }

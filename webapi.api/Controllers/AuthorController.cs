@@ -19,13 +19,16 @@ namespace webapi.api.Controllers
             { this.authorService = authorService; }
 
         [HttpGet("")]
-        public IEnumerable<Author> GetAllAuthors() => authorService.GetAllAuthors();
+        public IEnumerable<Author> GetAllAuthors() =>
+            authorService.GetAllAuthors();
 
-        //[HttpGet("{authorName}")]
-        //public Task<Author> GetAuthorByName(String authorName) => authorService.GetByName(authorName);
+        [HttpGet("{authorName}")]
+        public Task<Author> GetAuthorByName(String authorName) =>
+            authorService.GetAuthorByName(authorName);
 
-        //[HttpPost("")]
-        //[AllowAnonymous]
-        //public void AddAuthor([FromBody] Author author) => _authorRepository.Insert(author);
+        [HttpPost("")]
+        [AllowAnonymous]
+        public void AddAuthor([FromBody] Author author) =>
+            authorService.CreateAuthor(author);
     }
 }
